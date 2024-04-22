@@ -7,13 +7,8 @@ import random
 
 async def wait_random(max_delay: int = 10) -> float:
     """
-    This function waits for a random delay between 0 and max_delay (included) seconds.
-
-    Args:
-    max_delay (int): The maximum delay in seconds. Defaults to 10.
-
-    Returns:
-    float: The actual delay in seconds.
+    This function waits for a random delay between 0 and
+    max_delay (included) seconds.
     """
 
     # Generate a random delay between 0 and max_delay

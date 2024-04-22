@@ -2,8 +2,8 @@
 """Returns the floor of the float"""
 
 
-def floor(n: float) -> float:
+def floor(n: float) -> int:
     """
     Returns the floor of the float
     """
-    return float(n)
+    return int(n)

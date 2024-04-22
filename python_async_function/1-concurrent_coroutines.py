@@ -2,27 +2,20 @@
 """This module contains the wait_random function."""
 
 import asyncio
-import random
+
+wait_random = __import__("0-basic_async_syntax").wait_random
 
 
-async def wait_random(max_delay: int = 10) -> float:
-    """
-    This function waits for a random delay between 0 and
-    max_delay (included) seconds.
-    """
+async def wait_n(n: int, max_delay: int) -> list[float]:
+    """Spawn wait_random n times with the specified max_delay."""
+    tasks = []
+    for _ in range(n):
+        task = asyncio.create_task(wait_random(max_delay))
+        tasks.append(task)
 
-    # Generate a random delay between 0 and max_delay
-    delay = random.uniform(0, max_delay)
+    delays = []
+    for task in tasks:
+        delay = await task
+        delays.append(delay)
 
-    # Wait for the delay
-    await asyncio.sleep(delay)
-
-    # Return the actual delay
-    return delay
-
-
-async def wait_n(n: int, max_delay: float) -> List[float]:
-    """Executes wait_random n times with the specified max_delay."""
-    tasks = [wait_random(max_delay) for _ in range(n)]
-    results = await asyncio.gather(*tasks)
-    return sorted(results)
+    return sorted(delays)

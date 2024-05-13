@@ -1,16 +1,17 @@
 /*eslint-disable*/
 export default class Car {
-    constructor(brand, motor, color) {
-        this._brand = brand;
-        this._motor = motor;
-        this._color = color;
-    }
+  constructor(brand, motor, color) {
+    this._brand = brand;
+    this._motor = motor;
+    this._color = color;
+  }
 
-    cloneCar() {
-        return new this.constructorSymbol.species;
-    }
+  cloneCar() {
+    const origin = this;
+    return Object.assign(Object.create(Object.getPrototypeOf(origin)), {
+      _brand: undefined,
+      _motor: undefined,
+      _color: undefined,
+    });
+  }
 }
-
-Car[Symbol.species] = function () {
-    return this;
-};
